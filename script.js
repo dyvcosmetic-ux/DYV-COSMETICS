@@ -193,7 +193,7 @@ const products = [
     price: 23000,
     badge: "",
     img: "productos/RUBOR MINERALIZADO ANIK.png"
-  }
+  },
     // =========================
   // GLITTER Y ILUMINADORES
   // =========================
