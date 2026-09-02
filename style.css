@@ -39,10 +39,6 @@ a{text-decoration:none;color:inherit}
 .hero-notes{display:flex;gap:20px;margin-top:45px;font-size:10px;color:var(--muted)}
 .hero-image{height:500px;position:relative;overflow:hidden}
 .hero-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.82)}
-.hero-card{position:absolute;z-index:2;left:25px;bottom:25px;background:#fff;padding:22px 25px;min-width:145px;box-shadow:0 15px 40px #0002}
-.hero-card span{font-size:9px;letter-spacing:.2em;color:var(--rose)}
-.hero-card strong{font:600 29px/.9 var(--serif);display:block;margin:9px 0}
-.hero-card small{font-size:7px;letter-spacing:.2em}
 .categories,.products-section,.about{padding:95px 7%}
 .section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:35px}
 .section-heading h2,.about h2{font:600 42px/1.05 var(--serif);letter-spacing:-.03em}
