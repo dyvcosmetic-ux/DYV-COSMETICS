@@ -1,5 +1,5 @@
 const products = [
-  {id:1,name:"BB CREAM TRENDY",category:"PIEL",price:25.000,badge:"BEST SELLER",img:"src="./productos/BB CREAM TRENDY.png"},
+  {id:1,name:"Base Glow Natural",category:"Rostro",price:52000,badge:"BEST SELLER",img:"https://images.unsplash.com/photo-1631730486572-226d1b3f6f7a?auto=format&fit=crop&w=700&q=85"},
   {id:2,name:"Blush Rosé",category:"Rostro",price:32000,badge:"NUEVO",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"},
   {id:3,name:"Lip Oil Cherry",category:"Labios",price:28000,badge:"TRENDING",img:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"},
   {id:4,name:"Labial Nude Soft",category:"Labios",price:26000,badge:"",img:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"},
