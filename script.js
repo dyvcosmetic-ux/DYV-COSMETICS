@@ -1,12 +1,198 @@
 const products = [
-  {id:1,name:"Base Glow Natural",category:"Rostro",price:52000,badge:"BEST SELLER",img:"https://images.unsplash.com/photo-1631730486572-226d1b3f6f7a?auto=format&fit=crop&w=700&q=85"},
-  {id:2,name:"Blush Rosé",category:"Rostro",price:32000,badge:"NUEVO",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"},
-  {id:3,name:"Lip Oil Cherry",category:"Labios",price:28000,badge:"TRENDING",img:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"},
-  {id:4,name:"Labial Nude Soft",category:"Labios",price:26000,badge:"",img:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"},
-  {id:5,name:"Paleta Sunset",category:"Ojos",price:68000,badge:"FAVORITO",img:"https://images.unsplash.com/photo-1512207846876-bb54ef5056e3?auto=format&fit=crop&w=700&q=85"},
-  {id:6,name:"Delineador Black",category:"Ojos",price:22000,badge:"",img:"https://images.unsplash.com/photo-1571875257727-256c39da42af?auto=format&fit=crop&w=700&q=85"},
-  {id:7,name:"Set x5 Brochas",category:"Accesorios",price:45000,badge:"NUEVO",img:"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"},
-  {id:8,name:"Esponja Beauty",category:"Accesorios",price:18000,badge:"",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"}
+  // =========================
+  // PIEL
+  // =========================
+  {
+    id: 1,
+    name: "BB Cream Trendy",
+    category: "Piel",
+    price: 25000,
+    badge: "NUEVO",
+    img: "productos/BB CREAM TRENDY.png"
+  },
+  {
+    id: 2,
+    name: "Base Feels Ruby Rose",
+    category: "Piel",
+    price: 33000,
+    badge: "",
+    img: "productos/BASE FEELS RUBY ROSE.png"
+  },
+  {
+    id: 3,
+    name: "My Concealer de Bloomshell",
+    category: "Piel",
+    price: 23500,
+    badge: "",
+    img: "productos/MY CONCEALER DE BLOOMSHELL.png"
+  },
+  {
+    id: 4,
+    name: "Corrector con Vitamina E - M Y K",
+    category: "Piel",
+    price: 19000,
+    badge: "",
+    img: "productos/CORRECTOR CON VITAMINA E - M Y K.png"
+  },
+
+
+  // =========================
+  // CEJAS
+  // =========================
+  {
+    id: 5,
+    name: "Gel de Cejas - Montoc",
+    category: "Cejas",
+    price: 28000,
+    badge: "",
+    img: "productos/GEL DE CEJAS - MONTOC.png"
+  },
+  {
+    id: 6,
+    name: "Gel de Cejas - Ruby Rose",
+    category: "Cejas",
+    price: 20000,
+    badge: "",
+    img: "productos/GEL DE CEJAS - RUBY ROSE.png"
+  },
+  {
+    id: 7,
+    name: "Gel de Cejas - Melu",
+    category: "Cejas",
+    price: 20000,
+    badge: "",
+    img: "productos/GEL DE CEJAS - MELU.png"
+  },
+  {
+    id: 8,
+    name: "Trío de Cejas - Lula",
+    category: "Cejas",
+    price: 16000,
+    badge: "",
+    img: "productos/TRIO DE CEJAS - LULA.png"
+  },
+  {
+    id: 9,
+    name: "Eyebrow Cream Makeup",
+    category: "Cejas",
+    price: 12000,
+    badge: "",
+    img: "productos/EYEBROW CREAM MAKEUP.png"
+  },
+
+
+  // =========================
+  // OJOS
+  // =========================
+  {
+    id: 10,
+    name: "Delineador Plumón Elaya",
+    category: "Ojos",
+    price: 18000,
+    badge: "",
+    img: "productos/DELINEADOR PLUMON ELAYA.png"
+  },
+  {
+    id: 11,
+    name: "Delineador Plumón - OG",
+    category: "Ojos",
+    price: 17500,
+    badge: "",
+    img: "productos/DELINEADOR PLUMON - OG.png"
+  },
+  {
+    id: 12,
+    name: "Delineador Pincel Samy",
+    category: "Ojos",
+    price: 14000,
+    badge: "",
+    img: "productos/DELINEADOR PINCEL SAMY.png"
+  },
+  {
+    id: 13,
+    name: "Pestañina Prosa Tapa Gris",
+    category: "Ojos",
+    price: 19900,
+    badge: "",
+    img: "productos/PESTAÑINA - PROSA TAPA GRIS.png"
+  },
+  {
+    id: 14,
+    name: "Pestañina Prosa Tapa Rosada",
+    category: "Ojos",
+    price: 19900,
+    badge: "",
+    img: "productos/PESTAÑINA - PROSA TAPA ROSADA.png"
+  },
+  {
+    id: 15,
+    name: "Pestañina Prosa Tapa Morada",
+    category: "Ojos",
+    price: 19900,
+    badge: "",
+    img: "productos/PESTAÑINA - PROSA TAPA MORADA.png"
+  },
+  {
+    id: 16,
+    name: "Mega Full Size - Esika",
+    category: "Ojos",
+    price: 30000,
+    badge: "",
+    img: "productos/MEGA FULL SIZE - ESIKA.png"
+  },
+  {
+    id: 17,
+    name: "Kit Delineadores Negro y Blanco Stitch",
+    category: "Ojos",
+    price: 0,
+    badge: "",
+    img: "productos/KIT DELINEADORES NEGRO Y BLANCO STITCH.png"
+  },
+
+
+  // =========================
+  // RUBORES
+  // =========================
+  {
+    id: 18,
+    name: "Rubor Ani-K Bonita",
+    category: "Rubores",
+    price: 20000,
+    badge: "",
+    img: "productos/RUBOR ANI-K BONITA.png"
+  },
+  {
+    id: 19,
+    name: "Rubor Sirenita Ruby Rose",
+    category: "Rubores",
+    price: 27500,
+    badge: "",
+    img: "productos/RUBOR SIRENITA RUBY ROSE.png"
+  },
+  {
+    id: 20,
+    name: "Rubor y Labial Lip Mousse",
+    category: "Rubores",
+    price: 13900,
+    badge: "",
+    img: "productos/RUBOR Y LABIAL LIP MOUSSE.png"
+  },
+  {
+    id: 21,
+    name: "Mia Blush Trend",
+    category: "Rubores",
+    price: 28000,
+    badge: "",
+    img: "productos/MIA BLUSH TREND.png"
+  },
+  {
+    id: 22,
+    name: "Rubor Mineralizado Ani-K",
+    category: "Rubores",
+    price: 23000,
+    badge: "",
+    img: "productos/RUBOR MINERALIZADO ANIK.png"
+  }
 ];
 
 const WHATSAPP_NUMBER = "573247726205"; // CAMBIA ESTE NÚMERO por el WhatsApp de D Y V
