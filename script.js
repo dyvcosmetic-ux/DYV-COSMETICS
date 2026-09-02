@@ -9,7 +9,7 @@ const products = [
   {id:8,name:"Esponja Beauty",category:"Accesorios",price:18000,badge:"",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"}
 ];
 
-const WHATSAPP_NUMBER = "573214171747"; // CAMBIA ESTE NÚMERO por el WhatsApp de D Y V
+const WHATSAPP_NUMBER = "573247726205"; // CAMBIA ESTE NÚMERO por el WhatsApp de D Y V
 
 let cart = JSON.parse(localStorage.getItem("dyv-cart") || "[]");
 let currentFilter = "Todos";
@@ -167,7 +167,7 @@ document.getElementById("whatsappBtn").addEventListener("click",()=>{
   if(!cart.length) return;
   const lines = cart.map(item => `• ${item.name} x${item.qty} — ${money(item.price*item.qty)}`);
   const total = cart.reduce((sum,item)=>sum+item.price*item.qty,0);
-  const message = `Hola D Y V Beauty 💄%0A%0AQuiero hacer este pedido:%0A${encodeURIComponent(lines.join("\n"))}%0A%0ATotal: ${encodeURIComponent(money(total))}%0A%0A¿Me pueden confirmar disponibilidad y envío?`;
+  const message = `Hola D Y V COSMETIC 💄%0A%0AQuiero hacer este pedido:%0A${encodeURIComponent(lines.join("\n"))}%0A%0ATotal: ${encodeURIComponent(money(total))}%0A%0A¿Me pueden confirmar disponibilidad y envío?`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,"_blank");
 });
 
