@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="D Y V Beauty — maquillaje, belleza y accesorios.">
+  <title>D Y V Beauty | Maquillaje</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement">✨ Envíos a todo Colombia · Compra fácil por WhatsApp</div>
+
+  <header class="header">
+    <a href="#inicio" class="logo">D Y V <span>BEAUTY</span></a>
+
+    <nav class="nav" id="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Buscar">⌕</button>
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
+        🛍️ <span class="cart-count">0</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">D Y V BEAUTY · NUEVA COLECCIÓN</p>
+        <h1>Tu belleza,<br><em>tu estilo.</em></h1>
+        <p class="hero-text">
+          Maquillaje y accesorios seleccionados para crear looks increíbles
+          sin complicarte. Descubre tus nuevos favoritos.
+        </p>
+        <div class="hero-buttons">
+          <a href="#productos" class="btn btn-dark">Comprar ahora <span>→</span></a>
+          <a href="#categorias" class="text-link">Ver categorías</a>
+        </div>
+        <div class="hero-notes">
+          <span>♡ Productos seleccionados</span>
+          <span>✦ Atención personalizada</span>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="hero-card">
+          <span>NEW</span>
+          <strong>GLOW<br>EDIT</strong>
+          <small>D Y V BEAUTY</small>
+        </div>
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=85" alt="Productos de maquillaje D Y V">
+      </div>
+    </section>
+
+    <section class="categories" id="categorias">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DESCUBRE</p>
+          <h2>Compra por categoría</h2>
+        </div>
+        <p>Todo lo que necesitas para armar tu look.</p>
+      </div>
+
+      <div class="category-grid">
+        <button class="category-card cat-face" data-category="Rostro">
+          <span>ROSTRO</span><b>→</b>
+        </button>
+        <button class="category-card cat-lips" data-category="Labios">
+          <span>LABIOS</span><b>→</b>
+        </button>
+        <button class="category-card cat-eyes" data-category="Ojos">
+          <span>OJOS</span><b>→</b>
+        </button>
+        <button class="category-card cat-tools" data-category="Accesorios">
+          <span>ACCESORIOS</span><b>→</b>
+        </button>
+      </div>
+    </section>
+
+    <section class="products-section" id="productos">
+      <div class="section-heading products-heading">
+        <div>
+          <p class="eyebrow">SHOP D Y V</p>
+          <h2>Favoritos de la semana</h2>
+        </div>
+        <div class="filters">
+          <button class="filter active" data-filter="Todos">Todos</button>
+          <button class="filter" data-filter="Rostro">Rostro</button>
+          <button class="filter" data-filter="Labios">Labios</button>
+          <button class="filter" data-filter="Ojos">Ojos</button>
+          <button class="filter" data-filter="Accesorios">Accesorios</button>
+        </div>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="promo">
+      <div>
+        <p class="eyebrow">D Y V TIP</p>
+        <h2>El maquillaje no tiene reglas.<br><em>Hazlo a tu manera.</em></h2>
+      </div>
+      <a href="#productos" class="btn btn-light">Explorar productos →</a>
+    </section>
+
+    <section class="about" id="nosotros">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1000&q=85" alt="Maquillaje y brochas">
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">SOBRE D Y V</p>
+        <h2>Pequeña tienda.<br><em>Gran actitud.</em></h2>
+        <p>
+          D Y V nace como una tienda de maquillaje pensada para encontrar
+          productos bonitos, prácticos y a precios accesibles. Queremos que
+          comprar maquillaje sea sencillo, cercano y divertido.
+        </p>
+        <div class="about-points">
+          <div><b>01</b><span>Productos seleccionados</span></div>
+          <div><b>02</b><span>Atención cercana</span></div>
+          <div><b>03</b><span>Pedidos fáciles por WhatsApp</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter" id="contacto">
+      <div>
+        <p class="eyebrow">ÚNETE A D Y V</p>
+        <h2>Recibe novedades y promociones</h2>
+      </div>
+      <form id="newsletterForm">
+        <input type="email" id="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <a href="#inicio" class="logo">D Y V <span>BEAUTY</span></a>
+      <p>Maquillaje para todos los días y todos tus moods.</p>
+    </div>
+    <div class="footer-links">
+      <div><b>TIENDA</b><a href="#productos">Productos</a><a href="#categorias">Categorías</a></div>
+      <div><b>AYUDA</b><a href="#contacto">Contacto</a><a href="#nosotros">Nosotros</a></div>
+      <div><b>SÍGUENOS</b><a href="#">Instagram</a><a href="#">TikTok</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 D Y V Beauty</span>
+      <span>Hecho by Nico</span>
+    </div>
+  </footer>
+
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <button class="close-search" id="closeSearch">×</button>
+      <p class="eyebrow">BUSCAR EN D Y V</p>
+      <input type="text" id="searchInput" placeholder="Busca labiales, bases, sombras..." autofocus>
+      <p class="search-hint">Escribe el nombre de un producto o categoría.</p>
+    </div>
+  </div>
+
+  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>Tu carrito</h2>
+      <button id="closeCart">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty" id="cartEmpty">
+      <div>🛍️</div>
+      <h3>Tu carrito está vacío</h3>
+      <p>Agrega algunos productos y aparecerán aquí.</p>
+    </div>
+    <div class="cart-footer" id="cartFooter">
+      <div class="total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+      <button class="whatsapp-btn" id="whatsappBtn">Finalizar pedido por WhatsApp <span>→</span></button>
+      <small>El pedido se confirma directamente contigo por WhatsApp.</small>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="toast" id="toast">Producto agregado 🛍️</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
