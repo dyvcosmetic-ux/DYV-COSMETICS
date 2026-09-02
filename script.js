@@ -1,3 +1,7 @@
+// ==========================================
+// D Y V COSMETIC - PRODUCTOS
+// ==========================================
+
 const products = [
   // =========================
   // PIEL
@@ -34,7 +38,6 @@ const products = [
     badge: "",
     img: "productos/CORRECTOR CON VITAMINA E - M Y K.png"
   },
-
 
   // =========================
   // CEJAS
@@ -79,7 +82,6 @@ const products = [
     badge: "",
     img: "productos/EYEBROW CREAM MAKEUP.png"
   },
-
 
   // =========================
   // OJOS
@@ -149,7 +151,6 @@ const products = [
     img: "productos/KIT DELINEADORES NEGRO Y BLANCO STITCH.png"
   },
 
-
   // =========================
   // RUBORES
   // =========================
@@ -195,10 +196,21 @@ const products = [
   }
 ];
 
-const WHATSAPP_NUMBER = "573247726205"; // CAMBIA ESTE NÚMERO por el WhatsApp de D Y V
+
+// ==========================================
+// CONFIGURACIÓN
+// ==========================================
+
+const WHATSAPP_NUMBER = "573247726205";
 
 let cart = JSON.parse(localStorage.getItem("dyv-cart") || "[]");
+
 let currentFilter = "Todos";
+
+
+// ==========================================
+// ELEMENTOS DEL HTML
+// ==========================================
 
 const grid = document.getElementById("productGrid");
 const cartPanel = document.getElementById("cartPanel");
@@ -209,166 +221,798 @@ const cartFooter = document.getElementById("cartFooter");
 const cartTotal = document.getElementById("cartTotal");
 const toast = document.getElementById("toast");
 
-function money(value){
-  return new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(value);
+
+// ==========================================
+// FORMATO DE DINERO
+// ==========================================
+
+function money(value) {
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    maximumFractionDigits: 0
+  }).format(value);
 }
 
-function renderProducts(list = products){
-  grid.innerHTML = list.map(p => `
-    <article class="product-card">
-      <div class="product-image">
-        ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
-        <img src="${p.img}" alt="${p.name}" loading="lazy">
-        <button class="quick-add" onclick="addToCart(${p.id})">AGREGAR AL CARRITO +</button>
-      </div>
-      <div class="product-info">
-        <div class="product-category">${p.category.toUpperCase()}</div>
-        <div class="product-name">${p.name}</div>
-        <div class="product-price">${money(p.price)}</div>
-      </div>
-    </article>
-  `).join("");
-}
 
-function renderCart(){
-  const count = cart.reduce((sum,item)=>sum+item.qty,0);
-  document.querySelector(".cart-count").textContent = count;
+// ==========================================
+// MOSTRAR PRODUCTOS
+// ==========================================
 
-  if(!cart.length){
-    cartItems.innerHTML = "";
-    cartEmpty.style.display = "block";
-    cartFooter.style.display = "none";
+function renderProducts(list = products) {
+
+  if (!grid) {
+    console.error("No se encontró #productGrid en el HTML.");
     return;
   }
 
-  cartEmpty.style.display = "none";
-  cartFooter.style.display = "block";
-  cartItems.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <img src="${item.img}" alt="${item.name}">
-      <div>
-        <h4>${item.name}</h4>
-        <p>${money(item.price)}</p>
-        <div class="qty">
-          <button onclick="changeQty(${item.id},-1)">−</button>
-          <span>${item.qty}</span>
-          <button onclick="changeQty(${item.id},1)">+</button>
-        </div>
+  if (!list.length) {
+    grid.innerHTML = `
+      <div class="no-products">
+        <p>No encontramos productos.</p>
       </div>
-      <button class="remove" onclick="removeFromCart(${item.id})">×</button>
-    </div>
-  `).join("");
+    `;
+    return;
+  }
 
-  const total = cart.reduce((sum,item)=>sum + item.price * item.qty,0);
-  cartTotal.textContent = money(total);
+  grid.innerHTML = list.map(p => `
+
+    <article class="product-card">
+
+      <div class="product-image">
+
+        ${
+          p.badge
+            ? `<span class="badge">${p.badge}</span>`
+            : ""
+        }
+
+        <img
+          src="${p.img}"
+          alt="${p.name}"
+          loading="lazy"
+          onerror="this.style.display='none'; this.parentElement.classList.add('image-error');"
+        >
+
+        <button
+          class="quick-add"
+          onclick="addToCart(${p.id})"
+        >
+          AGREGAR AL CARRITO +
+        </button>
+
+      </div>
+
+      <div class="product-info">
+
+        <div class="product-category">
+          ${p.category.toUpperCase()}
+        </div>
+
+        <div class="product-name">
+          ${p.name}
+        </div>
+
+        <div class="product-price">
+          ${money(p.price)}
+        </div>
+
+      </div>
+
+    </article>
+
+  `).join("");
 }
 
-function saveCart(){
-  localStorage.setItem("dyv-cart",JSON.stringify(cart));
+
+// ==========================================
+// CARRITO
+// ==========================================
+
+function renderCart() {
+
+  const count = cart.reduce(
+    (sum, item) => sum + item.qty,
+    0
+  );
+
+  const cartCount = document.querySelector(".cart-count");
+
+  if (cartCount) {
+    cartCount.textContent = count;
+  }
+
+
+  if (!cart.length) {
+
+    if (cartItems) {
+      cartItems.innerHTML = "";
+    }
+
+    if (cartEmpty) {
+      cartEmpty.style.display = "block";
+    }
+
+    if (cartFooter) {
+      cartFooter.style.display = "none";
+    }
+
+    return;
+  }
+
+
+  if (cartEmpty) {
+    cartEmpty.style.display = "none";
+  }
+
+  if (cartFooter) {
+    cartFooter.style.display = "block";
+  }
+
+
+  if (cartItems) {
+
+    cartItems.innerHTML = cart.map(item => `
+
+      <div class="cart-item">
+
+        <img
+          src="${item.img}"
+          alt="${item.name}"
+        >
+
+        <div>
+
+          <h4>
+            ${item.name}
+          </h4>
+
+          <p>
+            ${money(item.price)}
+          </p>
+
+          <div class="qty">
+
+            <button
+              onclick="changeQty(${item.id}, -1)"
+            >
+              −
+            </button>
+
+            <span>
+              ${item.qty}
+            </span>
+
+            <button
+              onclick="changeQty(${item.id}, 1)"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+        <button
+          class="remove"
+          onclick="removeFromCart(${item.id})"
+        >
+          ×
+        </button>
+
+      </div>
+
+    `).join("");
+  }
+
+
+  const total = cart.reduce(
+    (sum, item) =>
+      sum + item.price * item.qty,
+    0
+  );
+
+
+  if (cartTotal) {
+    cartTotal.textContent = money(total);
+  }
+}
+
+
+// ==========================================
+// GUARDAR CARRITO
+// ==========================================
+
+function saveCart() {
+
+  localStorage.setItem(
+    "dyv-cart",
+    JSON.stringify(cart)
+  );
+
   renderCart();
 }
 
-function addToCart(id){
-  const product = products.find(p=>p.id===id);
-  const existing = cart.find(item=>item.id===id);
-  if(existing) existing.qty++;
-  else cart.push({...product,qty:1});
-  saveCart();
-  showToast(`${product.name} agregado 🛍️`);
-}
 
-function changeQty(id,delta){
-  const item = cart.find(p=>p.id===id);
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty <= 0) cart = cart.filter(p=>p.id!==id);
-  saveCart();
-}
+// ==========================================
+// AGREGAR AL CARRITO
+// ==========================================
 
-function removeFromCart(id){
-  cart = cart.filter(p=>p.id!==id);
-  saveCart();
-}
+function addToCart(id) {
 
-function openCart(){
-  cartPanel.classList.add("open");
-  overlay.classList.add("show");
-}
-function closeCart(){
-  cartPanel.classList.remove("open");
-  overlay.classList.remove("show");
-}
-
-function showToast(text){
-  toast.textContent = text;
-  toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"),1800);
-}
-
-document.getElementById("cartBtn").addEventListener("click",openCart);
-document.getElementById("closeCart").addEventListener("click",closeCart);
-overlay.addEventListener("click",closeCart);
-
-document.querySelectorAll(".filter").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    currentFilter = btn.dataset.filter;
-    renderProducts(currentFilter==="Todos" ? products : products.filter(p=>p.category===currentFilter));
-  });
-});
-
-document.querySelectorAll(".category-card").forEach(card=>{
-  card.addEventListener("click",()=>{
-    const category = card.dataset.category;
-    currentFilter = category;
-    document.querySelectorAll(".filter").forEach(b=>{
-      b.classList.toggle("active",b.dataset.filter===category);
-    });
-    renderProducts(products.filter(p=>p.category===category));
-    document.getElementById("productos").scrollIntoView({behavior:"smooth"});
-  });
-});
-
-const searchOverlay = document.getElementById("searchOverlay");
-const searchInput = document.getElementById("searchInput");
-
-document.getElementById("searchBtn").addEventListener("click",()=>{
-  searchOverlay.classList.add("open");
-  setTimeout(()=>searchInput.focus(),100);
-});
-document.getElementById("closeSearch").addEventListener("click",()=>searchOverlay.classList.remove("open"));
-searchOverlay.addEventListener("click",(e)=>{
-  if(e.target===searchOverlay) searchOverlay.classList.remove("open");
-});
-searchInput.addEventListener("input",()=>{
-  const term = searchInput.value.toLowerCase().trim();
-  const filtered = products.filter(p =>
-    p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term)
+  const product = products.find(
+    p => p.id === id
   );
-  renderProducts(filtered);
-});
 
-document.getElementById("whatsappBtn").addEventListener("click",()=>{
-  if(!cart.length) return;
-  const lines = cart.map(item => `• ${item.name} x${item.qty} — ${money(item.price*item.qty)}`);
-  const total = cart.reduce((sum,item)=>sum+item.price*item.qty,0);
-  const message = `Hola D Y V COSMETIC 💄%0A%0AQuiero hacer este pedido:%0A${encodeURIComponent(lines.join("\n"))}%0A%0ATotal: ${encodeURIComponent(money(total))}%0A%0A¿Me pueden confirmar disponibilidad y envío?`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,"_blank");
-});
+  if (!product) {
+    return;
+  }
 
-document.getElementById("newsletterForm").addEventListener("submit",(e)=>{
-  e.preventDefault();
-  showToast("¡Gracias por suscribirte! ♡");
-  e.target.reset();
-});
 
-document.getElementById("menuBtn").addEventListener("click",()=>{
-  document.getElementById("nav").classList.toggle("open");
-});
-document.querySelectorAll(".nav a").forEach(a=>a.addEventListener("click",()=>{
-  document.getElementById("nav").classList.remove("open");
-}));
+  const existing = cart.find(
+    item => item.id === id
+  );
+
+
+  if (existing) {
+
+    existing.qty++;
+
+  } else {
+
+    cart.push({
+      ...product,
+      qty: 1
+    });
+
+  }
+
+
+  saveCart();
+
+  showToast(
+    `${product.name} agregado 🛍️`
+  );
+}
+
+
+// ==========================================
+// CAMBIAR CANTIDAD
+// ==========================================
+
+function changeQty(id, delta) {
+
+  const item = cart.find(
+    p => p.id === id
+  );
+
+  if (!item) {
+    return;
+  }
+
+
+  item.qty += delta;
+
+
+  if (item.qty <= 0) {
+
+    cart = cart.filter(
+      p => p.id !== id
+    );
+
+  }
+
+
+  saveCart();
+}
+
+
+// ==========================================
+// ELIMINAR PRODUCTO
+// ==========================================
+
+function removeFromCart(id) {
+
+  cart = cart.filter(
+    p => p.id !== id
+  );
+
+  saveCart();
+}
+
+
+// ==========================================
+// ABRIR CARRITO
+// ==========================================
+
+function openCart() {
+
+  if (cartPanel) {
+    cartPanel.classList.add("open");
+  }
+
+  if (overlay) {
+    overlay.classList.add("show");
+  }
+}
+
+
+// ==========================================
+// CERRAR CARRITO
+// ==========================================
+
+function closeCart() {
+
+  if (cartPanel) {
+    cartPanel.classList.remove("open");
+  }
+
+  if (overlay) {
+    overlay.classList.remove("show");
+  }
+}
+
+
+// ==========================================
+// MENSAJE TEMPORAL
+// ==========================================
+
+function showToast(text) {
+
+  if (!toast) {
+    return;
+  }
+
+  toast.textContent = text;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  }, 1800);
+}
+
+
+// ==========================================
+// BOTÓN DEL CARRITO
+// ==========================================
+
+const cartBtn = document.getElementById("cartBtn");
+
+if (cartBtn) {
+
+  cartBtn.addEventListener(
+    "click",
+    openCart
+  );
+
+}
+
+
+const closeCartBtn =
+  document.getElementById("closeCart");
+
+if (closeCartBtn) {
+
+  closeCartBtn.addEventListener(
+    "click",
+    closeCart
+  );
+
+}
+
+
+if (overlay) {
+
+  overlay.addEventListener(
+    "click",
+    closeCart
+  );
+
+}
+
+
+// ==========================================
+// FILTROS DE PRODUCTOS
+// ==========================================
+
+document.querySelectorAll(".filter")
+  .forEach(btn => {
+
+    btn.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".filter")
+          .forEach(b =>
+            b.classList.remove("active")
+          );
+
+
+        btn.classList.add("active");
+
+
+        currentFilter =
+          btn.dataset.filter;
+
+
+        if (
+          currentFilter === "Todos"
+        ) {
+
+          renderProducts(products);
+
+        } else {
+
+          const filtered =
+            products.filter(
+              p =>
+                p.category ===
+                currentFilter
+            );
+
+          renderProducts(filtered);
+        }
+
+      }
+    );
+
+  });
+
+
+// ==========================================
+// TARJETAS DE CATEGORÍAS
+// ==========================================
+
+document
+  .querySelectorAll(".category-card")
+  .forEach(card => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        const category =
+          card.dataset.category;
+
+
+        currentFilter = category;
+
+
+        document
+          .querySelectorAll(".filter")
+          .forEach(btn => {
+
+            btn.classList.toggle(
+              "active",
+              btn.dataset.filter ===
+              category
+            );
+
+          });
+
+
+        renderProducts(
+          products.filter(
+            p =>
+              p.category ===
+              category
+          )
+        );
+
+
+        const productosSection =
+          document.getElementById(
+            "productos"
+          );
+
+
+        if (productosSection) {
+
+          productosSection.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+
+      }
+    );
+
+  });
+
+
+// ==========================================
+// BUSCADOR
+// ==========================================
+
+const searchOverlay =
+  document.getElementById(
+    "searchOverlay"
+  );
+
+const searchInput =
+  document.getElementById(
+    "searchInput"
+  );
+
+const searchBtn =
+  document.getElementById(
+    "searchBtn"
+  );
+
+const closeSearch =
+  document.getElementById(
+    "closeSearch"
+  );
+
+
+if (searchBtn) {
+
+  searchBtn.addEventListener(
+    "click",
+    () => {
+
+      if (searchOverlay) {
+
+        searchOverlay.classList.add(
+          "open"
+        );
+
+      }
+
+      if (searchInput) {
+
+        setTimeout(
+          () => searchInput.focus(),
+          100
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+if (closeSearch) {
+
+  closeSearch.addEventListener(
+    "click",
+    () => {
+
+      if (searchOverlay) {
+
+        searchOverlay.classList.remove(
+          "open"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+if (searchOverlay) {
+
+  searchOverlay.addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target ===
+        searchOverlay
+      ) {
+
+        searchOverlay.classList.remove(
+          "open"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+if (searchInput) {
+
+  searchInput.addEventListener(
+    "input",
+    () => {
+
+      const term =
+        searchInput.value
+          .toLowerCase()
+          .trim();
+
+
+      const filtered =
+        products.filter(p =>
+
+          p.name
+            .toLowerCase()
+            .includes(term)
+
+          ||
+
+          p.category
+            .toLowerCase()
+            .includes(term)
+
+        );
+
+
+      renderProducts(filtered);
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// WHATSAPP
+// ==========================================
+
+const whatsappBtn =
+  document.getElementById(
+    "whatsappBtn"
+  );
+
+
+if (whatsappBtn) {
+
+  whatsappBtn.addEventListener(
+    "click",
+    () => {
+
+      if (!cart.length) {
+
+        showToast(
+          "Tu carrito está vacío 🛍️"
+        );
+
+        return;
+      }
+
+
+      const lines =
+        cart.map(
+          item =>
+            `• ${item.name} x${item.qty} — ${money(
+              item.price * item.qty
+            )}`
+        );
+
+
+      const total =
+        cart.reduce(
+          (sum, item) =>
+            sum +
+            item.price *
+            item.qty,
+          0
+        );
+
+
+      const message =
+        `Hola D Y V COSMETIC 💄\n\n` +
+        `Quiero hacer este pedido:\n` +
+        `${lines.join("\n")}\n\n` +
+        `Total: ${money(total)}\n\n` +
+        `¿Me pueden confirmar disponibilidad y envío?`;
+
+
+      const url =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=` +
+        encodeURIComponent(message);
+
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// NEWSLETTER
+// ==========================================
+
+const newsletterForm =
+  document.getElementById(
+    "newsletterForm"
+  );
+
+
+if (newsletterForm) {
+
+  newsletterForm.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+      showToast(
+        "¡Gracias por suscribirte! ♡"
+      );
+
+      newsletterForm.reset();
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// MENÚ MÓVIL
+// ==========================================
+
+const menuBtn =
+  document.getElementById(
+    "menuBtn"
+  );
+
+const nav =
+  document.getElementById(
+    "nav"
+  );
+
+
+if (menuBtn && nav) {
+
+  menuBtn.addEventListener(
+    "click",
+    () => {
+
+      nav.classList.toggle(
+        "open"
+      );
+
+    }
+  );
+
+}
+
+
+document
+  .querySelectorAll(".nav a")
+  .forEach(a => {
+
+    a.addEventListener(
+      "click",
+      () => {
+
+        if (nav) {
+
+          nav.classList.remove(
+            "open"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+// ==========================================
+// INICIAR PÁGINA
+// ==========================================
 
 renderProducts();
+
 renderCart();
