@@ -28,7 +28,7 @@ const products = [
     category: "Piel",
     price: 23500,
     badge: "",
-    img: "productos/MY CONCEALER DE BLOOMSHELL.png"
+    img: "productos/My Concealer de Bloomshell.png"
   },
   {
     id: 4,
